@@ -1,0 +1,159 @@
+@startuml
+' Relations entre les classes
+Formulaire "1.."-- "1.." Etudiant : Participe
+Menu "1.."-- "1.." Formulaire : pilote
+Formulaire "1"-- "1.." Epreuve : Passe
+Formulaire "1"-- "1.." Fraude : Fraude
+Fraude "1" -- "1.." fraudeCalculatrice : Utiliser
+Fraude "1" -- "1.." fraudeIag : Non déclaré
+fraudeIag <|-- fraudeIagConnectée
+Fraude "1" -- "1..*" fraudePapier : Cacher
+Formulaire -- DevLogFraude
+Fraude -- DevLogFraude
+Menu -- DevLogFraude
+' ----------------------------
+' Classe DevLogFraude
+' ----------------------------
+class DevLogFraude {
++CreationFormulaire() : void
++GestionFormulaires() : void
+}
+' ----------------------------
+' Classe Menu
+' ----------------------------
+class Menu {
+    -scanner : Scanner
+    -gestionFormulaires : GestionFormulaires
+    +getScanner() : Scanner
+    +setScanner(id : Scanner) : void
+    +getGestionFormulaires() : GestionFormulaires
+    +setGestionFormulaires(dateCreation : GestionFormulaires) : void
+    +void afficherMenuPrincipal()
+    +int lireChoix(int min, int max)
+}
+
+' ----------------------------
+' Classe Formulaire
+' ----------------------------
+class Formulaire {
+    -Id : int
+    -dateCreation : DATE
+    -dateModification : DATE
+    +getId() : int
+    +setId(id : int) : void
+    +getDateCreation() : DATE
+    +setDateCreation(dateCreation : DATE) : void
+    +getDateModification() : DATE
+    +setDateModification(dateModification : DATE) : void
+    +creationFormulaires() :
+    +retirerFormulaire();
+    +listerFormulaires();
+
+}
+
+' ----------------------------
+' Classe Epreuve
+' ----------------------------
+class Epreuve {
+    -Date : DATE
+    -Durée : DateTime
+    -ECUE : string
+    -Cursus : string
+    -Modalité : string
+    +getDate() : DATE
+    +setDate(date : DATE) : void
+    +getDurée() : DateTime
+    +setDurée(durée : DateTime) : void
+    +getECUE() : string
+    +setECUE(ecue : string) : void
+    +getCursus() : string
+    +setCursus(cursus : string) : void
+    +getModalité() : string
+    +setModalité(modalité : string) : void
+}
+
+' ----------------------------
+' Classe Etudiant
+' ----------------------------
+class Etudiant {
+    -idApprenant : int
+    -Nom : string
+    -Prenom : string
+    -Cursus : string
+    +getIdApprenant() : int
+    +setIdApprenant(idApprenant : int) : void
+    +getNom() : string
+    +setNom(nom : string) : void
+    +getPrenom() : string
+    +setPrenom(prenom : string) : void
+    +getCursus() : string
+    +setCursus(cursus : string) : void
+}
+
+' ----------------------------
+' Classe Fraude
+' ----------------------------
+class Fraude {
+    -idApprenant : int
+    -Nom : string
+    -Prenom : string
+    -Cursus : string
+    -DateRevelation : Date
+    -Description : string
+    +getIdApprenant() : int
+    +setIdApprenant(idApprenant : int) : void
+    +getNom() : string
+    +setNom(nom : string) : void
+    +getPrenom() : string
+    +setPrenom(prenom : string) : void
+    +getCursus() : string
+    +setCursus(cursus : string) : void
+    +getDateRevelation() : Date
+    +setDateRevelation(dateRevelation : Date) : void
+    +getDescription() : string
+    +setDescription(description : string) : void
+}
+
+' ----------------------------
+' Classe fraudeCalculatrice
+' ----------------------------
+class fraudeCalculatrice {
+    -marque : string
+    -programme : string
+    +getMarque() : string
+    +setMarque(marque : string) : void
+    +getProgramme() : string
+    +setProgramme(programme : string) : void
+}
+
+' ----------------------------
+' Classe fraudeIag
+' ----------------------------
+class fraudeIag {
+    -nomService : string
+    +getNomService() : string
+    +setNomService(nomService : string) : void
+}
+
+' ----------------------------
+' Classe fraudeIagConnectée
+' ----------------------------
+class fraudeIagConnectée {
+    -adresseIP : String
+    +getAdresseIP() : String
+    +setAdresseIP(adresseIP : String) : void
+}
+
+' ----------------------------
+' Classe fraudePapier
+' ----------------------------
+class fraudePapier {
+    -dimensions : reel
+    -etatPlié : booleen
+    +getDimensions() : reel
+    +setDimensions(dimensions : reel) : void
+    +isEtatPlié() : booleen
+    +setEtatPlié(etatPlié : booleen) : void
+}
+
+@enduml
