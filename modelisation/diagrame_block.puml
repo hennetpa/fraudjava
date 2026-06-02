@@ -15,8 +15,10 @@ Menu -- DevLogFraude
 ' Classe DevLogFraude
 ' ----------------------------
 class DevLogFraude {
-+CreationFormulaire() : void
 +GestionFormulaires() : void
++creationFormulaires() : void
++retirerFormulaire(); void
++listerFormulaires(); void
 }
 ' ----------------------------
 ' Classe Menu
@@ -45,9 +47,7 @@ class Formulaire {
     +setDateCreation(dateCreation : DATE) : void
     +getDateModification() : DATE
     +setDateModification(dateModification : DATE) : void
-    +creationFormulaires() :
-    +retirerFormulaire();
-    +listerFormulaires();
+
 
 }
 
