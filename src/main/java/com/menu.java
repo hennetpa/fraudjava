@@ -48,10 +48,10 @@ public int lireChoix(int min, int max) {
             if (choix >= min && choix <= max) {
                 return choix;
             } else {
-                System.out.printf("Veuillez entrer un nombre entre %d et %d.\n", min, max);
+                System.out.printf("Veuillez entrer un chiffre entre %d et %d.\n", min, max);
             }
         } catch (NumberFormatException e) {
-            System.out.println("Saisie invalide. Veuillez entrer un nombre.");
+            System.out.println("Saisie invalide. Veuillez entrer un chiffre.");
         }
 
         }
@@ -83,7 +83,6 @@ private void ajouterFormulaire() {
     }
 
     // Étape 3: Saisie des fraudes
-
         }
         System.out.println("\n--- Menu Principal ---");
         System.out.println("1. Fraud Calculatrice");
@@ -95,17 +94,16 @@ private void ajouterFormulaire() {
         int choix = lireChoix(1, 4);
         switch (choix) {
             case 1:
-
-                fraudes = ajouterFraudCalculatrice();
+                fraud.ajouterFraudCalculatrice();
                 break;
             case 2:
-                fraudes = ajouterFraudIag();
+                fraud.ajouterFraudIag();
                 break;
             case 3:
-                fraudes = ajouterFraudIagConnecter();
+                fraud.ajouterFraudIagConnecter();
                 break;
             case 4:
-                fraudes = ajouterFraudPapier();
+                fraud.ajouterFraudPapier();
                 break;
             }
         // Ajouter d'autres attributs selon le type
