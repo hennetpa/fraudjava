@@ -91,7 +91,7 @@ private void ajouterFormulaire() {
         System.out.println("4. Fraud Papier");
         System.out.print("Choisissez une option (1-4) : ");
 //scanf
-        int choix = lireChoix(1, 4);
+        int choix = menu.lireChoix(1, 4);
         switch (choix) {
             case 1:
                 fraud.ajouterFraudCalculatrice();
@@ -106,11 +106,13 @@ private void ajouterFormulaire() {
                 fraud.ajouterFraudPapier();
                 break;
             }
+         Formulaire.setId(lenght(<Formulaire>+1))
+
         // Ajouter d'autres attributs selon le type
 
 
     // Enregistrement du formulaire
-    Formulaire formulaire = new Formulaire(epreuve, etudiants, fraudes);
+    Formulaire formulaire = new Formulaire(epreuve, etudiants, fraudes );
     gestionFormulaires.ajouterFormulaire(formulaire);
     System.out.println("Formulaire ajouté avec succès ! ID : " + formulaire.getId());
 }

@@ -112,6 +112,10 @@ class Fraude {
     +setDateRevelation(dateRevelation : Date) : void
     +getDescription() : string
     +setDescription(description : string) : void
+    +ajouterFraudCalculatrice();
+    +ajouterFraudIag();
+    +ajouterFraudIagConnecter();
+    +ajouterFraudPapier();
 }
 
 ' ----------------------------
@@ -124,6 +128,7 @@ class fraudeCalculatrice {
     +setMarque(marque : string) : void
     +getProgramme() : string
     +setProgramme(programme : string) : void
+
 }
 
 ' ----------------------------
