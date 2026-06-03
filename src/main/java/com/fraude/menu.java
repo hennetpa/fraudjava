@@ -57,3 +57,91 @@ public int lireChoix(int min, int max) {
         }
     }
 
+private void ajouterFormulaire() {
+    // Étape 1: Sélection de l'épreuve
+    System.out.println("\n--- Ajout d'un formulaire ---");
+    System.out.print("Nom de l'épreuve : ");
+    String epreuve = scanner.nextLine();
+
+
+    // Étape 2: Saisie des étudiants
+    List<Etudiant> etudiants = new ArrayList<>();
+    while (true) {
+        System.out.println("\nAjouter un étudiant (ou 'fin' pour terminer) :");
+        System.out.print("Nom : ");
+        String nom = scanner.nextLine();
+        if (nom.equalsIgnoreCase("fin")) break;
+
+        System.out.print("Prénom : ");
+        String prenom = scanner.nextLine();
+        System.out.print("Numéro apprenant : ");
+        String numero = scanner.nextLine();
+        System.out.print("Cursus : ");
+        String cursus = scanner.nextLine();
+
+        etudiants.add(new Etudiant(nom, prenom, numero, cursus));
+    }
+
+    // Étape 3: Saisie des fraudes
+
+        }
+        System.out.println("\n--- Menu Principal ---");
+        System.out.println("1. Fraud Calculatrice");
+        System.out.println("2. Fraud IAG");
+        System.out.println("3. Fraud IAGconnecter");
+        System.out.println("4. Fraud Papier");
+        System.out.print("Choisissez une option (1-4) : ");
+//scanf
+        int choix = lireChoix(1, 4);
+        switch (choix) {
+            case 1:
+
+                fraudes = ajouterFraudCalculatrice();
+                break;
+            case 2:
+                fraudes = ajouterFraudIag();
+                break;
+            case 3:
+                fraudes = ajouterFraudIagConnecter();
+                break;
+            case 4:
+                fraudes = ajouterFraudPapier();
+                break;
+            }
+        // Ajouter d'autres attributs selon le type
+
+
+    // Enregistrement du formulaire
+    Formulaire formulaire = new Formulaire(epreuve, etudiants, fraudes);
+    gestionFormulaires.ajouterFormulaire(formulaire);
+    System.out.println("Formulaire ajouté avec succès ! ID : " + formulaire.getId());
+}
+
+private void retirerFormulaire() {
+    listerFormulaires();
+    if (gestionFormulaires.getTousLesFormulaires().isEmpty()) {
+        System.out.println("Aucun formulaire à retirer.");
+        return;
+    }
+    System.out.print("Entrez l'ID du formulaire à retirer : ");
+    String id = scanner.nextLine();
+    if (gestionFormulaires.retirerFormulaire(id)) {
+        System.out.println("Formulaire retiré avec succès.");
+    } else {
+        System.out.println("ID inconnu. Aucun formulaire retiré.");
+    }
+}
+
+private void listerFormulaires() {
+    List<Formulaire> formulaires = gestionFormulaires.getTousLesFormulaires();
+    if (formulaires.isEmpty()) {
+        System.out.println("Aucun formulaire enregistré.");
+        return;
+    }
+    System.out.println("\n--- Liste des formulaires ---");
+    for (Formulaire f : formulaires) {
+        System.out.println(f);
+        System.out.println("-----------------------------");
+    }
+}
+}
