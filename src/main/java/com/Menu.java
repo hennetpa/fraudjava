@@ -59,7 +59,7 @@ public int lireChoix(int min, int max) {
 
 private void ajouterFormulaire() {
     // Étape 1: Sélection de l'épreuve
-    System.out.println("\n--- Ajout d'un formulaire ---");
+    System.out.println("\n--- Ajout de l'Épreuve ---");
     System.out.print("Nom de l'épreuve : ");
     String nomEpreuve = scanner.nextLine();
     System.out.print("Date de l'épreuve : ");
@@ -87,11 +87,12 @@ private void ajouterFormulaire() {
         System.out.print("Cursus : ");
         String cursus = scanner.nextLine();
 
+
         etudiants.add(new Etudiant(nom, prenom, numero, cursus));
     }
 
     // Étape 3: Saisie des fraudes
-        }
+        Fraude fraude = new Fraude();
         System.out.println("\n--- Menu Principal ---");
         System.out.println("1. Fraud Calculatrice");
         System.out.println("2. Fraud IAG");
@@ -114,13 +115,14 @@ private void ajouterFormulaire() {
                 fraud.ajouterFraudPapier();
                 break;
             }
-         Formulaire.setId(lenght(<Formulaire>+1))
+
 
         // Ajouter d'autres attributs selon le type
 
 
     // Enregistrement du formulaire
     Formulaire formulaire = new Formulaire(epreuve, etudiants, fraudes );
+    formulaire.setId(gestionFormulaires.getTousLesFormulaires().size() + 1);
     gestionFormulaires.ajouterFormulaire(formulaire);
     System.out.println("Formulaire ajouté avec succès ! ID : " + formulaire.getId());
 }
