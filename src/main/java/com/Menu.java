@@ -61,8 +61,16 @@ private void ajouterFormulaire() {
     // Étape 1: Sélection de l'épreuve
     System.out.println("\n--- Ajout d'un formulaire ---");
     System.out.print("Nom de l'épreuve : ");
-    String epreuve = scanner.nextLine();
-
+    String nomEpreuve = scanner.nextLine();
+    System.out.print("Date de l'épreuve : ");
+    String dateEpreuve = scanner.nextLine();
+    System.out.print("Durée de l'épreuve : ");
+    String dureeEpreuve = scanner.nextLine();
+    System.out.print("Nom de l'ECUE de l'épreuve : ");
+    String ecueEpreuve = scanner.nextLine();
+    System.out.print("Modalite de l'épreuve : ");
+    String modaliteEpreuve = scanner.nextLine();
+    Epreuve epreuve = new.Epreuve(nomEpreuve,dateEpreuve,dureeEpreuve,ecueEpreuve,modaliteEpreuve);
 
     // Étape 2: Saisie des étudiants
     List<Etudiant> etudiants = new ArrayList<>();
