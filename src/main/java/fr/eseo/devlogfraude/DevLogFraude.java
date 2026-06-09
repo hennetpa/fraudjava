@@ -26,4 +26,13 @@ public class DevLogFraude {
             "E3e",
             Modalite.EXAMEN_ECRIT
     );
+    Epreuve epreuve2 = new Epreuve(
+            "Jeanneuteau",
+            LocalDate.of(2026, 4, 25),
+            LocalTime.of(11, 30),
+            Duration.ofHours(1),
+            "E4e",
+            Modalite.EXAMEN_ECRIT
+    );
+    
 }
