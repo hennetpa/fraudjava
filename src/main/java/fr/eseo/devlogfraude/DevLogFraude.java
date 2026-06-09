@@ -46,4 +46,17 @@ public class DevLogFraude {
         "Michel",
         new Cursus("E5e")
     );
+     Etudiant etudiant3 = new Etudiant(
+        614,
+        "Rousseau",
+        "Claude",
+        new Cursus("E4e")
+    );
+         Etudiant etudiant4 = new Etudiant(
+        624,
+        "Gardien",
+        "Didier",
+        new Cursus("E3a")
+    );
+    
 }
