@@ -34,6 +34,15 @@ public class DevLogFraude {
             "E4e",
             Modalite.EXAMEN_ECRIT
     );
+
+    Epreuve epreuve2 = new Epreuve(
+            "Jeanneuteau",
+            LocalDate.of(2026, 6, 4),
+            LocalTime.of(9, 30),
+            Duration.ofHours(2),
+            "E3e",
+            Modalite.EXAMEN_ECRIT
+    );
     Etudiant etudiant1 = new Etudiant(
         150,
         "Hosni",
@@ -58,7 +67,14 @@ public class DevLogFraude {
         "Didier",
         new Cursus("E3a")
     );
+    Etudiant etudiant5 = new Etudiant(
+        644,
+        "Jean",
+        "Vladimir",
+        new Cursus("E3e")
+    );
 
+    
     
     Fraude fraude1 = new Fraude(
         "FraudeCalculatrice",
@@ -68,5 +84,15 @@ public class DevLogFraude {
         "E3e",
         LocalDate.of(2026, 6, 15),
         "A utilisé un programme sur sa calculatrice"
+        );
+    
+    Fraude fraude2 = new Fraude(
+        "FraudeCalculatrice",
+        2,
+        "Jean",
+        "Vladimir",
+        "E3e",
+        LocalDate.of(2026, 6, 4),
+        "A utilisé sa calculatrice lors d'ue épreuve non autorisé"
 );
 }
