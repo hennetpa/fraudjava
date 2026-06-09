@@ -18,6 +18,13 @@ import java.util.List;
  * @version 1.0
  */
 public class DevLogFraude {
+
+    public static void main(String[] args) {
+        GestionFormulaires gestionFormulaires = CreationFormulaire();
+        Menu menu = new Menu(new java.util.Scanner(System.in), gestionFormulaires);
+        menu.afficherMenuPrincipal();
+    }
+
     Epreuve epreuve1 = new Epreuve(
             "INFO-301",
             LocalDate.of(2026, 5, 15),
