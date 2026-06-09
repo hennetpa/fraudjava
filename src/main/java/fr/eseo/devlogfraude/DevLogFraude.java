@@ -18,7 +18,6 @@ import java.util.List;
  * @version 1.0
  */
 public class DevLogFraude {
-
     public static void main(String[] args) {
         GestionFormulaires gestionFormulaires = CreationFormulaire();
         Menu menu = new Menu(new java.util.Scanner(System.in), gestionFormulaires);
@@ -32,5 +31,74 @@ public class DevLogFraude {
             Duration.ofHours(2),
             "E3e",
             Modalite.EXAMEN_ECRIT
+    );
+    Epreuve epreuve2 = new Epreuve(
+            "Jeanneuteau",
+            LocalDate.of(2026, 4, 25),
+            LocalTime.of(11, 30),
+            Duration.ofHours(1),
+            "E4e",
+            Modalite.EXAMEN_ECRIT
+    );
+
+    Epreuve epreuve2 = new Epreuve(
+            "Jeanneuteau",
+            LocalDate.of(2026, 6, 4),
+            LocalTime.of(9, 30),
+            Duration.ofHours(2),
+            "E3e",
+            Modalite.EXAMEN_ECRIT
+    );
+    Etudiant etudiant1 = new Etudiant(
+            150,
+            "Hosni",
+            "Mickael",
+            new Cursus("E3e")
+    );
+    Etudiant etudiant2 = new Etudiant(
+            67,
+            "Bernard",
+            "Michel",
+            new Cursus("E5e")
+    );
+    Etudiant etudiant3 = new Etudiant(
+            614,
+            "Rousseau",
+            "Claude",
+            new Cursus("E4e")
+    );
+    Etudiant etudiant4 = new Etudiant(
+            624,
+            "Gardien",
+            "Didier",
+            new Cursus("E3a")
+    );
+    Etudiant etudiant5 = new Etudiant(
+            644,
+            "Jean",
+            "Vladimir",
+            new Cursus("E3e")
+    );
+
+
+
+    Fraude fraude1 = new Fraude(
+            "FraudeCalculatrice",
+            1,
+            "Hosni",
+            "Mickael",
+            "E3e",
+            LocalDate.of(2026, 6, 15),
+            "A utilisé un programme sur sa calculatrice"
+    );
+
+    Fraude fraude2 = new Fraude(
+            "FraudeCalculatrice",
+            2,
+            "Jean",
+            "Vladimir",
+            "E3e",
+            LocalDate.of(2026, 6, 4),
+            "A utilisé sa calculatrice lors d'ue épreuve non autorisé"
     );
 }
