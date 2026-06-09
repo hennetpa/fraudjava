@@ -1,164 +1,245 @@
 @startuml
-' Relations entre les classes
-Formulaire "1.."-- "1.." Etudiant : Participe
-Menu "1.."-- "1.." Formulaire : pilote
-Formulaire "1"-- "1.." Epreuve : Passe
-Formulaire "1"-- "1.." Fraude : Fraude
-Fraude "1" -- "1.." fraudeCalculatrice : Utiliser
-Fraude "1" -- "1.." fraudeIag : Non déclaré
-fraudeIag <|-- fraudeIagConnectée
-Fraude "1" -- "1..*" fraudePapier : Cacher
-Formulaire -- DevLogFraude
-Fraude -- DevLogFraude
-Menu -- DevLogFraude
-' ----------------------------
-' Classe DevLogFraude
-' ----------------------------
-class DevLogFraude {
-+GestionFormulaires() : void
-+creationFormulaires() : void
-+retirerFormulaire(); void
-+listerFormulaires(); void
+package fr.eseo {
+package devlogfraude{
+    class DevLogFraude {
+        + main(String[]) : void
+        + {static} CreationFormulaire() : GestionFormulaires
+    }
+    DevLogFraude "1" *-- "1" modele.Fraude
+    DevLogFraude "1" *-- "0..*" modele
+    DevLogFraude "1" *-- "0..*" menu
+
+    package modele {
+        enum Cursus {
+            + E1
+            + E2
+            + E3E
+            + E3A
+            + E4
+            + E5
+            + {static} fromLibelle(String) : Cursus
+            + getLibelle() : String
+            + toString() : String
+        }
+
+        enum Modalite {
+            + EXAMEN_ECRIT
+            + ORAL
+            + QCM
+            + SUR_ORDINATEUR
+            + PROJET
+            + TP
+            + getLibelle() : String
+            + toString() : String
+        }
+
+        class Epreuve {
+            - ecue : String
+            - date : LocalDate
+            - heure : LocalTime
+            - duree : Duration
+            - cursus : String
+            - modalite : Modalite
+            + Epreuve()
+            + Epreuve(String, LocalDate, LocalTime, Duration, String, Modalite)
+        }
+
+        class Etudiant {
+            - idApprenant : int
+            - nom : String
+            - prenom : String
+            - cursus : Cursus
+            + Etudiant()
+            + Etudiant(int, String, String, Cursus)
+            + getIdApprenant() : int
+            + setIdApprenant(int) : void
+            + getNom() : String
+            + setNom(String) : void
+            + getPrenom() : String
+            + setPrenom(String) : void
+            + getCursus() : Cursus
+            + setCursus(Cursus) : void
+            + equals(Object) : boolean
+            + hashCode() : int
+            + toString() : String
+        }
+
+        class Formulaire {
+            - compteurId : static int
+            - id : int
+            - dateCreation : LocalDate
+            - dateModification : LocalDate
+            - epreuve : Epreuve
+            - etudiants : List<Etudiant>
+            - fraudes : List<Fraude>
+            + Formulaire()
+            + Formulaire(Epreuve, List<Etudiant>, List<Fraude>)
+            + getId() : int
+            + setId(int) : void
+            + getDateCreation() : LocalDate
+            + setDateCreation(LocalDate) : void
+            + getDateModification() : LocalDate
+            + setDateModification(LocalDate) : void
+            + getEpreuve() : Epreuve
+            + setEpreuve(Epreuve) : void
+            + getEtudiants() : List<Etudiant>
+            + setEtudiants(List<Etudiant>) : void
+        }
+
+        ' Relations
+        Formulaire "1" *-- "1" Epreuve
+        Formulaire "1" *-- "0..*" Etudiant
+        Formulaire "1" *-- "0..*" Fraude
+        Etudiant "1" *-- "1" Cursus
+        Epreuve "1" *-- "1" Modalite
+        package Fraude{
+            abstract class Fraude {
+                - idApprenant: int
+                - nom: String
+                - prenom: String
+                - cursus: String
+                - dateRevelation: LocalDate
+                - description: String
+
+                + Fraude()
+                + Fraude(idApprenant: int, nom: String, prenom: String, cursus: String, dateRevelation: LocalDate, description: String)
+
+                + {abstract} getTypeFraude(): String
+
+                + getIdApprenant(): int
+                + setIdApprenant(idApprenant: int): void
+                + getNom(): String
+                + setNom(nom: String): void
+                + getPrenom(): String
+                + setPrenom(prenom: String): void
+                + getCursus(): String
+                + setCursus(cursus: String): void
+                + getDateRevelation(): LocalDate
+                + setDateRevelation(dateRevelation: LocalDate): void
+                + getDescription(): String
+                + setDescription(description: String): void
+
+                + toString(): String
+            }
+
+            class FraudeCalculatrice {
+                - marque: String
+                - programme: String
+
+                + FraudeCalculatrice()
+                + FraudeCalculatrice(idApprenant: int, nom: String, prenom: String, cursus: String, dateRevelation: LocalDate, description: String, marque: String, programme: String)
+
+                + getMarque(): String
+                + setMarque(marque: String): void
+                + getProgramme(): String
+                + setProgramme(programme: String): void
+
+                + getTypeFraude(): String
+                + toString(): String
+            }
+
+            class FraudeIag {
+                - nomService: String
+
+                + FraudeIag()
+                + FraudeIag(idApprenant: int, nom: String, prenom: String, cursus: String, dateRevelation: LocalDate, description: String, nomService: String)
+
+                + getNomService(): String
+                + setNomService(nomService: String): void
+
+                + getTypeFraude(): String
+                + toString(): String
+            }
+
+            class FraudeIagConnectee {
+                - adresseIP: String
+
+                + FraudeIagConnectee()
+                + FraudeIagConnectee(idApprenant: int, nom: String, prenom: String, cursus: String, dateRevelation: LocalDate, description: String, nomService: String, adresseIP: String)
+
+                + getAdresseIP(): String
+                + setAdresseIP(adresseIP: String): void
+
+                + getTypeFraude(): String
+                + toString(): String
+            }
+
+            class FraudePapier {
+                - dimensions: double
+                - etatPlie: boolean
+
+                + FraudePapier()
+                + FraudePapier(idApprenant: int, nom: String, prenom: String, cursus: String, dateRevelation: LocalDate, description: String, dimensions: double, etatPlie: boolean)
+
+                + getDimensions(): double
+                + setDimensions(dimensions: double): void
+                + isEtatPlie(): boolean
+                + setEtatPlie(etatPlie: boolean): void
+
+                + getTypeFraude(): String
+                + toString(): String
+            }
+            Fraude <|-- FraudeCalculatrice
+            Fraude <|-- FraudeIag
+            FraudeIag <|-- FraudeIagConnectee
+            Fraude <|-- FraudePapier
+        }
+    }
+    package gestion{
+        class GestionFormulaires {
+            - formulaires : List<Formulaire>
+            - epreuves : List<Epreuve>
+            + GestionFormulaires()
+            + GestionFormulaires(List<Formulaire>, List<Epreuve>)
+            + getFormulaires() : List<Formulaire>
+            + setFormulaires(List<Formulaire>) : void
+            + getEpreuves() : List<Epreuve>
+            + setEpreuves(List<Epreuve>) : void
+            + creationFormulaire(Formulaire) : void
+            + retirerFormulaire(int) : boolean
+            + listerFormulaires() : List<Formulaire>
+            + rechercherParId(int) : Formulaire
+            + rechercherParEtudiant(int) : List<Formulaire>
+            + rechercherParEpreuve(String) : List<Formulaire>
+            + listerEpreuves() : List<Epreuve>
+            + ajouterEpreuve(Epreuve) : void
+        }
+
+    }
+    package menu {
+        class Menu {
+            - scanner : Scanner
+            - gestionFormulaires : GestionFormulaires
+            + Menu()
+            + Menu(Scanner, GestionFormulaires)
+            + getScanner() : Scanner
+            + setScanner(Scanner) : void
+            + getGestionFormulaires() : GestionFormulaires
+            + setGestionFormulaires(GestionFormulaires) : void
+            + afficherMenuPrincipal() : void
+            + lireChoix(int, int) : int
+            + ajouterFormulaire() : void
+            + retirerFormulaire() : void
+            + listerFormulaires() : void
+            + rechercherParEtudiant() : void
+            + rechercherParEpreuve() : void
+            - saisirEtudiant() : Etudiant
+            - saisirFraude() : Fraude
+            - afficherResultatsFormulaires(List<Formulaire>) : void
+            - afficherResultatsEtudiants(List<Etudiant>) : void
+        }
+
+
+    }
+                Menu "1" *-- "1" modele.Fraude
+                Menu "1" *-- "0..*" modele
+                Menu "1" *-- "0..*" gestion
+                GestionFormulaires "1" *-- "1" Epreuve
+                GestionFormulaires "1" *-- "0..*" Etudiant
+                GestionFormulaires "1" *-- "0..*" Formulaire
+
+
 }
-' ----------------------------
-' Classe Menu
-' ----------------------------
-class Menu {
-    -scanner : Scanner
-    -gestionFormulaires : GestionFormulaires
-    +getScanner() : Scanner
-    +setScanner(id : Scanner) : void
-    +getGestionFormulaires() : GestionFormulaires
-    +setGestionFormulaires(dateCreation : GestionFormulaires) : void
-    +void afficherMenuPrincipal()
-    +int lireChoix(int min, int max)
-}
-
-' ----------------------------
-' Classe Formulaire
-' ----------------------------
-class Formulaire {
-    -Id : int
-    -dateCreation : DATE
-    -dateModification : DATE
-    +getId() : int
-    +setId(id : int) : void
-    +getDateCreation() : DATE
-    +setDateCreation(dateCreation : DATE) : void
-    +getDateModification() : DATE
-    +setDateModification(dateModification : DATE) : void
-
-
-}
-
-' ----------------------------
-' Classe Epreuve
-' ----------------------------
-class Epreuve {
-    -Date : DATE
-    -Durée : DateTime
-    -ECUE : string
-    -Cursus : string
-    -Modalité : string
-    +getDate() : DATE
-    +setDate(date : DATE) : void
-    +getDurée() : DateTime
-    +setDurée(durée : DateTime) : void
-    +getECUE() : string
-    +setECUE(ecue : string) : void
-    +getCursus() : string
-    +setCursus(cursus : string) : void
-    +getModalité() : string
-    +setModalité(modalité : string) : void
-}
-
-' ----------------------------
-' Classe Etudiant
-' ----------------------------
-class Etudiant {
-    -idApprenant : int
-    -Nom : string
-    -Prenom : string
-    -Cursus : string
-    +getIdApprenant() : int
-    +setIdApprenant(idApprenant : int) : void
-    +getNom() : string
-    +setNom(nom : string) : void
-    +getPrenom() : string
-    +setPrenom(prenom : string) : void
-    +getCursus() : string
-    +setCursus(cursus : string) : void
-}
-
-' ----------------------------
-' Classe Fraude
-' ----------------------------
-class Fraude {
-    -idApprenant : int
-    -Nom : string
-    -Prenom : string
-    -Cursus : string
-    -DateRevelation : Date
-    -Description : string
-    +getIdApprenant() : int
-    +setIdApprenant(idApprenant : int) : void
-    +getNom() : string
-    +setNom(nom : string) : void
-    +getPrenom() : string
-    +setPrenom(prenom : string) : void
-    +getCursus() : string
-    +setCursus(cursus : string) : void
-    +getDateRevelation() : Date
-    +setDateRevelation(dateRevelation : Date) : void
-    +getDescription() : string
-    +setDescription(description : string) : void
-    +ajouterFraudCalculatrice();
-    +ajouterFraudIag();
-    +ajouterFraudIagConnecter();
-    +ajouterFraudPapier();
-}
-
-' ----------------------------
-' Classe fraudeCalculatrice
-' ----------------------------
-class fraudeCalculatrice {
-    -marque : string
-    -programme : string
-    +getMarque() : string
-    +setMarque(marque : string) : void
-    +getProgramme() : string
-    +setProgramme(programme : string) : void
-
-}
-
-' ----------------------------
-' Classe fraudeIag
-' ----------------------------
-class fraudeIag {
-    -nomService : string
-    +getNomService() : string
-    +setNomService(nomService : string) : void
-}
-
-' ----------------------------
-' Classe fraudeIagConnectée
-' ----------------------------
-class fraudeIagConnectée {
-    -adresseIP : String
-    +getAdresseIP() : String
-    +setAdresseIP(adresseIP : String) : void
-}
-
-' ----------------------------
-' Classe fraudePapier
-' ----------------------------
-class fraudePapier {
-    -dimensions : reel
-    -etatPlié : booleen
-    +getDimensions() : reel
-    +setDimensions(dimensions : reel) : void
-    +isEtatPlié() : booleen
-    +setEtatPlié(etatPlié : booleen) : void
 }
 
 @enduml
