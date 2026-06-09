@@ -34,5 +34,16 @@ public class DevLogFraude {
             "E4e",
             Modalite.EXAMEN_ECRIT
     );
-    
+    Etudiant etudiant1 = new Etudiant(
+        150,
+        "Hosni",
+        "Mickael",
+        new Cursus("E3e")
+    );
+    Etudiant etudiant2 = new Etudiant(
+        67,
+        "Bernard",
+        "Michel",
+        new Cursus("E5e")
+    );
 }
