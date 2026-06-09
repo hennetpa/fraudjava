@@ -166,48 +166,6 @@ public class GestionFormulaires {
     }
 
     /**
-     * Recherche des étudiants par nom (insensible à la casse).
-     *
-     * @param nom le nom à rechercher
-     * @return la liste des étudiants correspondants (dédupliqués)
-     */
-    public List<Etudiant> rechercherEtudiantsParNom(String nom) {
-        return formulaires.stream()
-                .flatMap(f -> f.getEtudiants().stream())
-                .filter(e -> e.getNom().equalsIgnoreCase(nom))
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Recherche des étudiants par prénom (insensible à la casse).
-     *
-     * @param prenom le prénom à rechercher
-     * @return la liste des étudiants correspondants (dédupliqués)
-     */
-    public List<Etudiant> rechercherEtudiantsParPrenom(String prenom) {
-        return formulaires.stream()
-                .flatMap(f -> f.getEtudiants().stream())
-                .filter(e -> e.getPrenom().equalsIgnoreCase(prenom))
-                .distinct()
-                .collect(Collectors.toList());
-    }
-
-    /**
-     * Recherche un étudiant précis par son numéro apprenant.
-     *
-     * @param idApprenant l'identifiant de l'apprenant
-     * @return l'étudiant correspondant ou null si non trouvé
-     */
-    public Etudiant rechercherEtudiantParId(int idApprenant) {
-        return formulaires.stream()
-                .flatMap(f -> f.getEtudiants().stream())
-                .filter(e -> e.getIdApprenant() == idApprenant)
-                .findFirst()
-                .orElse(null);
-    }
-
-    /**
      * Retourne la liste de toutes les épreuves disponibles.
      *
      * @return la liste des épreuves
