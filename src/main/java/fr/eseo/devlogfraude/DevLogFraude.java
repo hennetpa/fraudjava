@@ -52,11 +52,21 @@ public class DevLogFraude {
         "Claude",
         new Cursus("E4e")
     );
-         Etudiant etudiant4 = new Etudiant(
+    Etudiant etudiant4 = new Etudiant(
         624,
         "Gardien",
         "Didier",
         new Cursus("E3a")
     );
+
     
+    Fraude fraude1 = new Fraude(
+        "FraudeCalculatrice",
+        1,
+        "Hosni",
+        "Mickael",
+        "E3e",
+        LocalDate.of(2026, 6, 15),
+        "A utilisé un programme sur sa calculatrice"
+);
 }
