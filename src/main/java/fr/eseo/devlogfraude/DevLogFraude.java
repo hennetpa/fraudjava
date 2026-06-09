@@ -4,7 +4,6 @@ import fr.eseo.devlogfraude.gestion.GestionFormulaires;
 import fr.eseo.devlogfraude.menu.Menu;
 import fr.eseo.devlogfraude.modele.*;
 import fr.eseo.devlogfraude.modele.fraude.*;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -19,4 +18,12 @@ import java.util.List;
  * @version 1.0
  */
 public class DevLogFraude {
+    Epreuve epreuve1 = new Epreuve(
+            "INFO-301",
+            LocalDate.of(2026, 5, 15),
+            LocalTime.of(8, 0),
+            Duration.ofHours(2),
+            "E3e",
+            Modalite.EXAMEN_ECRIT
+    );
 }
