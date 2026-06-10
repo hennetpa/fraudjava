@@ -100,14 +100,17 @@ public class Menu {
         boolean continuer = true;
 
         while (continuer) {
-            System.out.println();
-            System.out.println("     DevLogFraude - Menu Principal  ");
-            System.out.println("  1. Ajouter un formulaire            ");
-            System.out.println("  2. Retirer un formulaire            ");
-            System.out.println("  3. Lister les formulaires           ");
-            System.out.println("  4. Rechercher par étudiant (ID)     ");
-            System.out.println("  5. Rechercher par épreuve (ECUE)    ");
-            System.out.println("  6. Quitter                          ");
+            System.out.println("||==================================||");
+            System.out.println("||   DevLogFraude - Menu Principal  ||");
+            System.out.println("||==================================||");
+            System.out.println("||  1. Ajouter un formulaire        ||");
+            System.out.println("||  2. Retirer un formulaire        ||");
+            System.out.println("||  3. Lister les formulaires       ||");
+            System.out.println("||  4. Rechercher par étudiant (ID) ||");
+            System.out.println("||  5. Rechercher par épreuve (ECUE)||");
+            System.out.println("||  6. Quitter                      ||");
+            System.out.println("||==================================||");
+
             System.out.print("Votre choix : ");
 
             int choix = lireChoix(1, 6);
